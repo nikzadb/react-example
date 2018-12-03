@@ -3,4 +3,16 @@ services:
   - docker
 
 script:
-  - docker build -t react-app .
+  - docker build -t nikzadb/react-example2 .
+  - docker images nikzadb/react-example2
+
+before_deploy:
+  - docker login -u nikzad -p Ryan2010
+  - docker images nikzadb/react-example2
+
+deploy:
+  - provider: script
+  - script: docker push nikzad/react-example2
+  on:
+    branch: master
+
